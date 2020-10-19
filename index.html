@@ -1,6 +1,61 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h2>Hola Mundo</h2>
-</body>
-</html>
+package sesion01;
+
+import java.util.Scanner;
+
+public class Practica1 {
+public static void main(String[] args) {
+
+System.out.println("Momento inicial:");
+System.out.println("================");
+
+Scanner sc = new Scanner(System.in);
+System.out.println("introduce la hora: ");
+int hora1 = sc.nextInt();
+int hora1EnSegundos = hora1 *3600;
+Scanner sc2 = new Scanner(System.in);
+System.out.println("Introduce los minutos: ");
+int min1 = sc.nextInt();
+min1= min1*3600;
+Scanner sc3 = new Scanner(System.in);
+System.out.println("Introduce los segundos: ");
+int seg1 = sc.nextInt();
+seg1= seg1 *3600;
+
+System.out.println("Momento final:");
+System.out.println("================");
+
+Scanner sc4 = new Scanner(System.in);
+System.out.println("introduce la hora: ");
+int hora2 = sc.nextInt();
+hora2= hora2 *3600;
+Scanner sc5 = new Scanner(System.in);
+System.out.println("Introduce los minutos: ");
+int min2 = sc.nextInt();
+min2=min2 *3600;
+Scanner sc6 = new Scanner(System.in);
+System.out.println("Introduce los segundos: ");
+int seg2 = sc.nextInt();
+seg2= seg2 *3600;
+
+hora1= hora1/3600;
+min1= min1/3600;
+seg1 = seg1/3600;
+hora2 = hora2/3600;
+min2= min2/3600;
+seg2= seg2/3600;
+
+
+System.out.println("Datos introducidos: " + "momento inicial: " + hora1 + ":" + min1 + ":" + seg1 + " " +
+"momento final: "+ hora2 + ":" + min2 + ":" + seg2 +"");
+
+int resta = hora2 - hora1;
+int resta2 = min2- min1;
+int resta3 = seg2 - seg1;
+
+System.out.println("");
+
+System.out.println("La diferencia de tiempo es: " + resta + ":" + resta2 + ":" + resta3);
+
+}
+
+}
