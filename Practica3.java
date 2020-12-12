@@ -26,6 +26,7 @@ public class Practica3 {
 		        }else{
 		            System.out.println("El numero introducido, " + num1 + " es par");
 		        }
+		        System.exit(0);
 		    }
 			if(programa == 2) {
 				System.out.println("Introduce el sueldo anual: ");
@@ -33,6 +34,7 @@ public class Practica3 {
 				if(sueldo > 9000) {
 					System.out.println("Debes pagar impuestos");
 				}
+				System.exit(0);
 			}
 			if(programa == 5) {
 				System.out.println("Introduce un numero: ");
@@ -49,6 +51,7 @@ public class Practica3 {
 				}else{
 					System.out.println("No es un triangulo");
 				}
+				System.exit(0);
 			}
 			if(programa == 6) {
 				System.out.println("Introduce el numero de tazas: ");
@@ -58,6 +61,7 @@ public class Practica3 {
 				}else {
 					System.out.println("Fin de semana");
 				}
+				System.exit(0);
 			}
 			if(programa == 7) {
 				System.out.println("Introduce la nota numerica: ");
@@ -76,10 +80,12 @@ public class Practica3 {
 				}else if(nota >= 9 && nota <= 10) {
 					System.out.println("SB");
 				}
+				System.exit(0);
 			}
 			if(programa != 1 || programa != 2 || programa != 5 || programa != 6 || programa !=7) {
 				System.out.println("Este ejercicio no forma parte del programa");
 			}
+			System.exit(0);
 		 }
 		if(opcion != 1 || opcion != 2){
 			System.out.println("opcion incorrecta");
@@ -154,6 +160,7 @@ public class Practica3 {
 						default:
 							System.out.println("Numero introducido es menor que 1 o mayor que 9");
 						}
+					System.exit(0);
 				}
 			if(programa2 == 3) {
 					System.out.println("Elige una casa para saber su caracteristica ");
@@ -166,7 +173,7 @@ public class Practica3 {
 					
 						switch(c1){
 				        case '1':
-				            System.out.println("Valentía");
+				            System.out.println("ValentÃ­a");
 				            break;
 				        case '2':
 				            System.out.println("Lealtad");
@@ -181,6 +188,7 @@ public class Practica3 {
 				            System.out.println("No es una casa valida");
 				
 				    }
+				System.exit(0);
 				}
 			if(programa2 == 4) {
 					System.out.println("Elige una direccion ");
@@ -213,6 +221,7 @@ public class Practica3 {
 				            System.out.println("Error");
 				
 				    }
+				System.exit(0);
 				}
 			if(programa2 != 1 || programa2 != 2 || programa2 != 3 || programa2 != 4) {
 				System.out.println("Este ejercicio no forma parte del programa");
