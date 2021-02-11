@@ -1,5 +1,5 @@
 /*Realizar un programa que comprueba si una cadena leída por teclado comienza por una subcadena
-introducida por teclado./*
+introducida por teclado.*\
 
 Scanner sc = new Scanner(System.in);
 System.out.println("Introduce cadena: ");
