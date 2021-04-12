@@ -1,1 +1,67 @@
+import java.io.File;
+import java.io.IOException;
 
+
+public class TeoriaGestionFicheros {
+
+    public static void main(String[] args) throws IOException {
+        // GESTIÓN DE ARCHIVOS
+        String raiz = "Ficheros\\..\\Quevedo"; //Ruta relativa
+        //File fichero = new File(raiz);
+
+        //System.out.println(fichero.exists());
+        // 1. Creación de archivos (en el sistema de archivos): método boolean createNewFile ********************************************************
+
+        //Crear fichero
+        crearFichero(raiz + "\\notas.txt");
+
+        // 2. Creación de directorios ***************************************
+
+        // Primero, crear una instancia de File; a continuación, llamar a boolean mkdir o boolean mkdirs
+        String segundoDam = raiz + "\\dam\\segundo";
+        crearCarpeta(segundoDam);
+
+
+
+
+        // 3. Eliminación de archivos y directorios: método boolean delete()
+
+
+        //Haced lo que sea para borrar el fichero listadoDaw.txt
+        //String ruta
+        
+        // borradoRecursivo(File dir);
+
+
+        // 4. Cambio de nombre y de ubicación de archivos y directorios
+        // para ambas cosas utilizamos el método renameTo(new File(nuevaRuta))
+
+    }
+
+    public static void crearFichero(String ruta) throws IOException {
+
+        // Dos pasos: 1) Crear una instancia de File;
+        File fichero = new File(ruta);
+
+        // 2) Invocar al método createNewFile();
+
+        boolean creado = fichero.createNewFile();
+        if(creado){
+            System.out.println("El fichero " + fichero.getName() + " Se ha creado");
+        }
+    }
+
+    public static void crearCarpeta(String ruta) throws IOException {
+
+        String segundoDam = ruta + "\\dam\\primero";
+        File carpeta = new File(segundoDam);
+        System.out.println(carpeta.exists());
+        // boolean mkdir: si no existe un directorio de los de la ruta, no lo crea y devuelve false
+        boolean creadaMkdir = carpeta.mkdir();
+        System.out.println("Resultado mkdir: " + creadaMkdir);
+
+        // boolean mkdirs: si no existe un directorio de los de la ruta, lo crea
+        boolean creadaMkdirs = carpeta.mkdirs();
+        System.out.println("Resultado mkdirs: " + creadaMkdirs);
+    }
+}
