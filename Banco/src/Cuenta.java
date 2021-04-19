@@ -1,4 +1,8 @@
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Cuenta {
     /* Escribe una clase llamada Cuenta. Debe contener cuatro atributos:
     saldo, de tipo long;
@@ -7,9 +11,9 @@ public class Cuenta {
     bloqueada de tipo boolean,
  */
     private String titular;
-    private String numero;
+    private String iban;
     private double saldo;
-    private boolean bloqueada;
+    private boolean bloqueada = false;
 
     /* También debe contener :
     - Un constructor con dos parámetros (titular y número).
@@ -18,9 +22,33 @@ public class Cuenta {
 
     Todas las cuentas se crean desbloqueadas*/
 
-    public Cuenta(String titular, String numero, double saldo) {
+    public Cuenta(String titular, String iban) {
         this.titular = titular;
-        this.numero = numero;
+        this.iban = iban;
+        saldo = 1;
+
+        String ruta = "C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco";
+        File fichero = new File(ruta + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24) + "\\movimientos.txt");
+        fichero.mkdirs();
+
+        try (FileWriter fw = new FileWriter("C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco2100\\0418\\1234567891\\movimientos.txt", true)) {
+            // append = true -> añade al final
+            // append = false (por defecto) -> sobreescribe
+            fw.write((int) saldo);
+            fw.write((int) saldo);
+            for (int i = 0; i < 10; i++) {
+                fw.write(i + "    ");
+            }
+
+        } catch (IOException e) {
+            System.out.println("Excepción de E/S: " + e.getMessage());
+        }
+
+    }
+
+    public Cuenta(String titular, String iban, double saldo) {
+        this.titular = titular;
+        this.iban = iban;
         this.saldo = saldo;
     }
     /* Añade los getter y setter para todos los atributos */
@@ -31,8 +59,8 @@ public class Cuenta {
 
     // no creamos setter para el titular porque no se puede cambiar el titular de una cuenta
 
-    public String getNumero() {
-        return numero;
+    public String getIban() {
+        return iban;
     }
 
     // no creamos setter porque no se puede cambiar un número de cuenta
@@ -89,13 +117,12 @@ public class Cuenta {
     "El titular ... con número de cuenta ... tiene un saldo de ... euros."*/
     public void imprimir() {
         System.out.println("El titular " + this.titular + " con número de cuenta "
-                + this.numero + " tiene un saldo de " + this.saldo + " euros.");
+                + this.iban + " tiene un saldo de " + this.saldo + " euros.");
     }
 
 
 
 }
-
 
 
 
