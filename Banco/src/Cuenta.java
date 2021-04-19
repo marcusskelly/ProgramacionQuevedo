@@ -28,7 +28,7 @@ public class Cuenta {
         saldo = 1;
 
         String ruta = "C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco";
-        File fichero = new File(ruta + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24) + "\\movimientos.txt");
+        File fichero = new File(ruta + "\\" + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24) + "\\movimientos.txt");
         fichero.mkdirs();
 
         try (FileWriter fw = new FileWriter("C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco2100\\0418\\1234567891\\movimientos.txt", true)) {
