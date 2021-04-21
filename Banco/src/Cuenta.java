@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,7 +18,6 @@ public class Cuenta {
     - Un constructor con dos parámetros (titular y número).
     - Un constructor con tres parámetros (titular, número y saldo),
     para inicializar estos atributos.
-
     Todas las cuentas se crean desbloqueadas*/
 
     public Cuenta(String titular, String iban) {
@@ -27,11 +25,11 @@ public class Cuenta {
         this.iban = iban;
         saldo = 1;
 
-        String ruta = "C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco";
-        File fichero = new File(ruta + "\\" + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24) + "\\movimientos.txt");
+        String ruta = "C:\\Users\\Estela\\IdeaProjects\\Ficheros\\Banco";
+        File fichero = new File(ruta + "\\" + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24));
         fichero.mkdirs();
 
-        try (FileWriter fw = new FileWriter("C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco2100\\0418\\1234567891\\movimientos.txt", true)) {
+        try (FileWriter fw = new FileWriter(ruta + "\\" + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24) + "\\movimientos.txt", true)) {
             // append = true -> añade al final
             // append = false (por defecto) -> sobreescribe
             fw.write((int) saldo);
@@ -123,8 +121,6 @@ public class Cuenta {
 
 
 }
-
-
 
 
 
