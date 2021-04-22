@@ -1,29 +1,42 @@
-import com.sun.deploy.net.MessageHeader;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class Sucursal {
 
-
     String entidad;
     String oficina;
-    static ArrayList<Cuenta> cuentas;
+    ArrayList<Cuenta> cuentas;
 
-    public Sucursal(String entidad, String oficina) throws IOException {
+    public Sucursal(String entidad, String oficina) {
         this.entidad = entidad;
         this.oficina = oficina;
-        File cuentas = new File("C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco\\cuentas");
-        boolean creado = cuentas.mkdirs();
-        if(creado){
-            System.out.println("El fichero " + cuentas.getName() + " Se ha creado");
-        }
+        ArrayList<Cuenta> cuentas = new ArrayList<>();
     }
 
-    public static void crearCuenta(String titular, String numero, double saldo) throws IOException {
-
-        Cuenta cuenta = new Cuenta(titular,numero,saldo);
-        cuentas.add(cuenta);
+    public String generarCC(){
+        int codigoControl1 = (int)(Math.random() * 9);
+        int codigoControl2 = (int)(Math.random() * 9);
+        String cControl = String.valueOf(codigoControl1) + String.valueOf(codigoControl2);
+        return cControl;
     }
+
+    public String generarNumeroCuenta(){
+        int numeroCuenta1 = (int)(Math.random() * 99999);
+        int numeroCuenta2 = (int)(Math.random() * 99999);
+        String nCuenta = String.valueOf(numeroCuenta1) + String.valueOf(numeroCuenta2);
+        return nCuenta;
+    }
+
+    public String generarIban(){
+        String iban = "ES" + generarCC() + entidad + oficina + generarCC() + generarNumeroCuenta();
+        return iban;
+    }
+
+    public void crearCuenta(String titular, double saldo){
+        Cuenta cuenta1 = new Cuenta(titular,generarIban(),saldo);
+        cuentas.add(cuenta1);
+    }
+
+    
+
 }
