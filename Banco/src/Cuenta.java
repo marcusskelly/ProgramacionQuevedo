@@ -32,11 +32,9 @@ public class Cuenta {
         try (FileWriter fw = new FileWriter(ruta + "\\" + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24) + "\\movimientos.txt", true)) {
             // append = true -> añade al final
             // append = false (por defecto) -> sobreescribe
-            fw.write((int) saldo);
-            fw.write((int) saldo);
-            for (int i = 0; i < 10; i++) {
-                fw.write(i + "    ");
-            }
+            String saldoCadena = String.valueOf(saldo);
+            fw.write(saldoCadena);
+
 
         } catch (IOException e) {
             System.out.println("Excepción de E/S: " + e.getMessage());
