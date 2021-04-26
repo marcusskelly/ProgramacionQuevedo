@@ -51,10 +51,10 @@ public class Sucursal {
 
 
     public double ingresar(Cuenta cuenta1,double cantidad) {
-        if (cuenta1.isBloqueada() == false) {
-            cuenta1.setSaldo(cuenta1.getSaldo() + cantidad);
+        if (cuentas.get(0).isBloqueada() == false) {
+            cuentas.get(0).setSaldo(cuentas.get(0).getSaldo() + cantidad);
             String ruta = "C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco";
-            try (FileWriter fw = new FileWriter(ruta + "\\" + cuenta1.getIban().substring(4,8) + "\\" + cuenta1.getIban().substring(8,12) + "\\" + cuenta1.getIban().substring(14,24) + "\\movimientos.txt", true)) {
+            try (FileWriter fw = new FileWriter(ruta + "\\" + cuentas.get(0).getIban().substring(4,8) + "\\" + cuentas.get(0).getIban().substring(8,12) + "\\" + cuentas.get(0).getIban().substring(14,24) + "\\movimientos.txt", true)) {
                 // append = true -> añade al final
                 // append = false (por defecto) -> sobreescribe
                 String saldoCadena = String.valueOf(cantidad);
@@ -66,16 +66,16 @@ public class Sucursal {
         } else {
             System.out.println("Cuenta bloqueada");
         }
-        return cuenta1.getSaldo();
+        return cuentas.get(0).getSaldo();
     }
 
     public double retirar(Cuenta cuenta1, double cantidad) {
-        if (cuenta1.isBloqueada() == false) {
+        if (cuentas.get(0).isBloqueada() == false) {
             if (cantidad <= cuenta1.getSaldo()) {
-                cuenta1.setSaldo(cuenta1.getSaldo() - cantidad);
-                System.out.println("Saldo resultante: " + cuenta1.getSaldo());
+                cuentas.get(0).setSaldo(cuentas.get(0).getSaldo() - cantidad);
+                System.out.println("Saldo resultante: " + cuentas.get(0).getSaldo());
                 String ruta = "C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco";
-                try (FileWriter fw = new FileWriter(ruta + "\\" + cuenta1.getIban().substring(4,8) + "\\" + cuenta1.getIban().substring(8,12) + "\\" + cuenta1.getIban().substring(14,24) + "\\movimientos.txt", true)) {
+                try (FileWriter fw = new FileWriter(ruta + "\\" + cuentas.get(0).getIban().substring(4,8) + "\\" + cuentas.get(0).getIban().substring(8,12) + "\\" + cuentas.get(0).getIban().substring(14,24) + "\\movimientos.txt", true)) {
                     // append = true -> añade al final
                     // append = false (por defecto) -> sobreescribe
                     String saldoCadena = "-" + String.valueOf(cantidad);
@@ -90,7 +90,7 @@ public class Sucursal {
         } else {
             System.out.println("Cuenta bloqueada");
         }
-        return cuenta1.getSaldo();
+        return cuentas.get(0).getSaldo();
     }
 
 
