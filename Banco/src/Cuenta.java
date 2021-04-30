@@ -46,6 +46,21 @@ public class Cuenta {
         this.titular = titular;
         this.iban = iban;
         this.saldo = saldo;
+        
+        String ruta = "C:\\Users\\Estela\\IdeaProjects\\Ficheros\\Banco";
+        File fichero = new File(ruta + "\\" + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24));
+        fichero.mkdirs();
+
+        try (FileWriter fw = new FileWriter(ruta + "\\" + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24) + "\\movimientos.txt", true)) {
+            // append = true -> añade al final
+            // append = false (por defecto) -> sobreescribe
+            String saldoCadena = String.valueOf(saldo);
+            fw.write(saldoCadena);
+
+
+        } catch (IOException e) {
+            System.out.println("Excepción de E/S: " + e.getMessage());
+        }
     }
     /* Añade los getter y setter para todos los atributos */
 
