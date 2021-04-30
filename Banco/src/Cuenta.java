@@ -25,7 +25,7 @@ public class Cuenta {
         this.iban = iban;
         saldo = 1;
 
-        String ruta = "C:\\Users\\Estela\\IdeaProjects\\Ficheros\\Banco";
+        String ruta = "D:\\Programacion\\Ficheros\\Banco";
         File fichero = new File(ruta + "\\" + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24));
         fichero.mkdirs();
 
@@ -46,8 +46,12 @@ public class Cuenta {
         this.titular = titular;
         this.iban = iban;
         this.saldo = saldo;
-        
-        String ruta = "C:\\Users\\Estela\\IdeaProjects\\Ficheros\\Banco";
+
+        this.titular = titular;
+        this.iban = iban;
+        saldo = 1;
+
+        String ruta = "D:\\Programacion\\Ficheros\\Banco";
         File fichero = new File(ruta + "\\" + iban.substring(4,8) + "\\" + iban.substring(8,12) + "\\" + iban.substring(14,24));
         fichero.mkdirs();
 
@@ -95,14 +99,7 @@ public class Cuenta {
     /* Define el método ingresar(long):long, que consiste en comprobar si la cuenta está bloqueada
     y, en caso de no estarlo, añadir una cantidad al saldo.
      */
-    public double ingresar(double cantidad) {
-        if (bloqueada == false) {
-            this.saldo = this.saldo + cantidad;
-        } else {
-            System.out.println("Cuenta bloqueada");
-        }
-        return saldo;
-    }
+
 
     /* Define el método retirar(long):long,
     en este caso, si la cuenta no está bloqueada y
@@ -110,19 +107,7 @@ public class Cuenta {
     hay que indicar: "Saldo insuficiente"
      En caso contrario hay que indicar el saldo que le queda.
      */
-    public double retirar(double cantidad) {
-        if (bloqueada == false) {
-            if (cantidad <= this.saldo) {
-                this.saldo = this.saldo - cantidad;
-                System.out.println("Saldo resultante: " + this.saldo);
-            } else {
-                System.out.println("Saldo insuficiente");
-            }
-        } else {
-            System.out.println("Cuenta bloqueada");
-        }
-        return this.saldo;
-    }
+
 
     /* Define el método imprimir, que visualiza :
     "El titular ... con número de cuenta ... tiene un saldo de ... euros."*/
@@ -134,6 +119,3 @@ public class Cuenta {
 
 
 }
-
-
-
