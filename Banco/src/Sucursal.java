@@ -16,7 +16,7 @@ public class Sucursal {
         this.oficina = oficina;
         ArrayList<Cuenta> cuentas = new ArrayList<>();
 
-        String ruta = "C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco";
+        String ruta = "D:\\Programacion\\Ficheros\\Banco";
         File fichero = new File(ruta + "\\" + entidad + "\\" + oficina);
         fichero.mkdirs();
     }
@@ -53,14 +53,14 @@ public class Sucursal {
 
 
     public double ingresar(Cuenta cuenta1,double cantidad) {
-        if (cuentas.get(0).isBloqueada() == false) {
-            cuentas.get(0).setSaldo(cuentas.get(0).getSaldo() + cantidad);
-            String ruta = "C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco";
-            try (FileWriter fw = new FileWriter(ruta + "\\" + entidad + "\\" + oficina + "\\" + cuentas.get(0).getIban().substring(14,24) + "\\movimientos.txt", true)) {
+        if (cuenta1.isBloqueada() == false) {
+            cuenta1.setSaldo(cuenta1.getSaldo() + cantidad);
+            String ruta = "D:\\Programacion\\Ficheros\\Banco";
+            try (FileWriter fw = new FileWriter(ruta + "\\" + entidad + "\\" + oficina + "\\" + cuenta1.getIban().substring(14,24) + "\\movimientos.txt", true)) {
                 // append = true -> añade al final
                 // append = false (por defecto) -> sobreescribe
                 String saldoCadena = String.valueOf(cantidad);
-                fw.write(saldoCadena);
+                fw.write("\n"+ saldoCadena);
 
             } catch (IOException e) {
                 System.out.println("Excepción de E/S: " + e.getMessage());
@@ -68,7 +68,7 @@ public class Sucursal {
         } else {
             System.out.println("Cuenta bloqueada");
         }
-        return cuentas.get(0).getSaldo();
+        return cuenta1.getSaldo();
     }
 
     public double retirar(Cuenta cuenta1, double cantidad) {
@@ -103,28 +103,29 @@ public class Sucursal {
         double sumaIngresos = 0;
         double sumaReintegros = 0;
 
-        String ruta = "C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco";
+        String ruta = "D:\\Programacion\\Ficheros\\Banco";
 
         File f = new File(ruta + "\\" + entidad + "\\" +oficina + "\\" + cuenta.getIban().substring(14,24) + "\\movimientos.txt");//Aqui se intento hacerlo directamente con FileWriter, pero sin exitofg
         try(Scanner sc = new Scanner(f)){
             while(sc.hasNextLine()){
-                if(sc.nextLine().startsWith("-")){
-                    sumaReintegros = sumaReintegros + Double.parseDouble(sc.nextLine());
+                String linea = sc.nextLine();
+                if(linea.startsWith("-")){
+                    sumaReintegros = sumaReintegros + Double.parseDouble(linea);
                 }else{
-                    sumaIngresos = sumaIngresos + Double.parseDouble(sc.nextLine());
+                    sumaIngresos = sumaIngresos + Double.parseDouble(linea);
                 }
             }
 
-        File fichero = new File(ruta + "\\" + entidad + "\\" +oficina + "\\" + cuenta.getIban().substring(14,24) + "\\extracto.txt");
-        fichero.createNewFile();
+            //File fichero = new File(ruta + "\\" + entidad + "\\" +oficina + "\\" + cuenta.getIban().substring(14,24) + "\\extracto.txt");
+            //fichero.createNewFile();
 
-        try(FileWriter fw = new FileWriter(fichero,true)){
-            fw.write("Titular: " + titular + "\n");
-            fw.write("iban: " + iban + "\n");
-            fw.write("Ingresos: " + sumaIngresos + "\n");
-            fw.write("Reintegros: " + sumaReintegros + "\n");
-            fw.write("Saldo: " + cuenta.getSaldo() + "\n");
-        }
+            try(FileWriter fw = new FileWriter(ruta + "\\" + entidad + "\\" +oficina + "\\" + cuenta.getIban().substring(14,24) + "\\extracto.txt",true)){
+                fw.write("Titular: " + titular + "\n");
+                fw.write("iban: " + iban + "\n");
+                fw.write("Ingresos: " + sumaIngresos + "\n");
+                fw.write("Reintegros: " + sumaReintegros + "\n");
+                fw.write("Saldo: " + cuenta.getSaldo() + "\n");
+            }
 
 
         }catch (FileNotFoundException e){
@@ -138,28 +139,31 @@ public class Sucursal {
         if(!cuenta.isBloqueada()){
             cuenta.setBloqueada(true);
         }
-        
-        String ruta = "C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco";
+
+        String ruta = "D:\\Programacion\\Ficheros\\Banco";
         File file = new File(ruta + "\\" + entidad + "\\" +oficina + "\\bloqueadas");
         file.mkdirs();
-        
+
         String origen = ruta + "\\" + entidad + "\\" +oficina + "\\" + cuenta.getIban().substring(14,24);
-        String destino = ruta + "\\" + entidad + "\\" +oficina + "\\bloqueadas\\" + cuenta.getIban().substring(14,24);
-        file.renameTo(new File(ruta + "\\" + entidad + "\\" +oficina + "\\bloqueadas\\" + cuenta.getIban().substring(14,24)));
+
+        String destino = ruta + "\\" + entidad + "\\" +oficina + "\\" + cuenta.getIban().substring(14,24) + "\\bloqueadas\\" + cuenta.getIban().substring(14,24);
+
+        file.renameTo(new File(destino));
+
     }
-    
+
     public void eliminarCuenta(Cuenta cuenta){
         if(!cuenta.isBloqueada()){
             bloquearCuenta(cuenta);
         }
-        
-        String ruta = "C:\\Users\\Estela\\IdeaProjects\\ficheros\\Banco";
+
+        String ruta = "D:\\Programacion\\Ficheros\\Banco";
         File f = new File(ruta + "\\" + entidad + "\\" +oficina + "\\bloqueadas\\" + cuenta.getIban().substring(14,24));
         boolean borrada = f.delete();
         if(borrada == false){
             borrarRecursivamente(f);
         }
-        
+
         String eliminadas = ruta + "\\" + entidad + "\\" +oficina + "\\cuentas_eliminadas.txt\\";
         File f2 = new File(eliminadas);
         try{
@@ -177,7 +181,7 @@ public class Sucursal {
             }
         }
     }
-    
+
     public static void borrarRecursivamente(File dir){
         File[] elementos = dir.listFiles();
         System.out.println("Contenido");
@@ -193,7 +197,7 @@ public class Sucursal {
         System.out.println("Borrado todo el directorio, y sus carpetas");
         boolean borrada = dir.delete();
         if(borrada)System.out.println("Borrada");
-        
+
     }
 
 
